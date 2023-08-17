@@ -1,6 +1,7 @@
 library(sf)
 library(cartography)
 library(ggplot2)
+library(ggspatial)
 
 district <- read_sf("shapefile/DISTRICTS_SANITAIRES/District.shp")
 
@@ -30,6 +31,9 @@ ggplot() +
   geom_sf(data = district[district$District%in%c("Ténado","Ziniaré"), ], colour = "orange", fill="orange" )+
   geom_sf_label(data = district[district$District%in%c("Ténado","Ziniaré"), ],
                 aes(label = District), label.padding = unit(1, "mm"))+
+  annotation_north_arrow(location = "bl", which_north = "true", 
+                         pad_x = unit(0.75, "in"), pad_y = unit(0.5, "in"),
+                         style = north_arrow_fancy_orienteering)+
   theme_bw()+
   theme(axis.title = element_blank(),
         axis.text = element_blank(),
